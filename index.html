@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クイズ 生徒用</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <audio id="questionSound" src="assets/audio/question.mp3" preload="auto"></audio>
+  <audio id="correctSound" src="assets/audio/correct.mp3" preload="auto"></audio>
+  <audio id="wrongSound" src="assets/audio/wrong.mp3" preload="auto"></audio>
+
+  <main class="container">
+    <h1>クイズゲーム</h1>
+
+    <section id="joinArea" class="card">
+      <h2>参加</h2>
+      <input id="groupName" type="text" placeholder="班番号 + 全角スペース + チーム名 （例：「1　数学大好きチーム」）">
+      <button id="joinBtn">参加する</button>
+    </section>
+
+    <section id="quizArea" class="card hidden">
+      <div class="waiting-area">
+        <div id="waitingSpinner" class="spinner hidden"></div>
+        <p id="statusText">待機中です</p>
+      </div>
+      <h2 id="questionText">問題を待っています</h2>
+      <div id="choices"></div>
+    </section>
+
+    <section id="allAnswersArea" class="card hidden">
+      <h2>みんなの回答</h2>
+      <div id="allAnswersList">まだ回答はありません</div>
+    </section>
+  </main>
+
+  <script type="module" src="js/player.js"></script>
+</body>
+</html>
