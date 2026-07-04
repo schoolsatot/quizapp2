@@ -1,3 +1,4 @@
+// 質問内容
 export const questionSets = {
   common: [
     {
