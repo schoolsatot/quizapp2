@@ -27,18 +27,35 @@ function renderRanking(groups) {
     return;
   }
 
-  entries
-    .sort((a, b) => (b[1].score || 0) - (a[1].score || 0))
-    .forEach(([groupName, data], index) => {
-      const div = document.createElement("div");
-      div.className = "ranking-row";
+  const sortedEntries = entries.sort(
+    (a, b) => (b[1].score || 0) - (a[1].score || 0)
+  );
 
-      div.innerHTML = `
-        <span class="rank">${index + 1}位</span>
-        <span class="ranking-name">${groupName}</span>
-        <span class="ranking-score">${data.score || 0}点</span>
-      `;
+  let previousScore = null;
+  let currentRank = 0;
 
-      rankingArea.appendChild(div);
-    });
+  sortedEntries.forEach(([groupName, data], index) => {
+    const score = data.score || 0;
+
+    if (score !== previousScore) {
+      currentRank = index + 1;
+      previousScore = score;
+    }
+
+    const div = document.createElement("div");
+    div.className = "ranking-row";
+
+    // 同率1位は、これまでの1位と同じように大きく表示
+    if (currentRank === 1) {
+      div.classList.add("top-rank");
+    }
+
+    div.innerHTML = `
+      <span class="rank">${currentRank}位</span>
+      <span class="ranking-name">${groupName}</span>
+      <span class="ranking-score">${score}点</span>
+    `;
+
+    rankingArea.appendChild(div);
+  });
 }
